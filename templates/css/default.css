@@ -1,0 +1,274 @@
+p,
+h1,
+h2,
+h3,
+h4,
+ul,
+li,
+img {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+ul,
+div {
+    margin: 0 0 25px 0;
+}
+
+li,
+p {
+    margin: 0 0 15px 0;
+    font-size: 0.7em;
+}
+
+body {
+    font-family: 'lucida grande', 'arial', 'trebuchet ms', sans-serif;
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    line-height: 1.125em;
+    color: #000;
+    background: #FFF url(../images/body-bg.gif) center top repeat-x;
+}
+
+/* Columns */
+
+.two-col .col1,
+.two-col .col2,
+.three-col .col1,
+.three-col .col2,
+.three-col .col3 {
+    float: left;
+    margin: 0;
+}
+
+/* Two columns */
+
+.two-col .col1 {
+    width: 525px;
+}
+
+.two-col .col2 {
+    width: 250px;
+    margin-left: 25px;
+}
+
+/* Three Columns */
+
+.three-col .col1,
+.three-col .col2,
+.three-col .col3 {
+    width: 250px;
+}
+
+.three-col .col2 { margin: 0 25px; }
+
+/* Section */
+
+.section {
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+    background: url(../images/section-bg-1.gif) left bottom repeat-x;
+}
+
+.section.second-section {
+    background-image: url(../images/section-bg-2.gif);
+}
+
+.section.third-section {
+    background-image: url(../images/section-bg-3.gif);
+}
+
+.section ul {
+    margin: 0 0 0 20px;
+}
+
+.section ul li {
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.section ul li strong {
+    color: #333;
+}
+
+#tagline {
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+/* Standard anchors */
+
+a { color: #999; }
+a:hover { color: #666; }
+
+/* Default headings */
+
+h1 {
+    font-family: georgia;
+    font-size: 2.6em;
+    color: #111;
+    line-height: 100%;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+    font-style: italic;
+}
+
+h2 {
+    margin-bottom: 15px;
+    color: #444;
+    font-weight: bold;
+    font-size: 0.9em;
+    font-family: georgia;
+}
+
+h2 span.extra {
+    color: #BBB;
+    font-family: 'lucida grande', verdana, sans-serif;
+    font-size: 0.76em;
+}
+
+h3 {
+    font-size: 1.0em;
+    color: #111;
+    margin-bottom: 25px;
+}
+
+/* Header */
+
+#header {
+    line-height: 100%;
+    margin: 40px 0 40px 80px;
+    width: 800px;
+}
+
+#header #logo {
+    text-indent: -1000px;
+    display: block;
+    width: 200px;
+    height: 200px;
+    outline: none;
+    background: url(../images/pypg_logo.png) 0px center no-repeat;
+}
+
+#content {
+    margin: 0 0 0 80px;
+    width: 800px;
+}
+
+#title-section {
+    margin-bottom: 40px;
+}
+
+h1#title {
+    font-style: normal;
+    font-size: 3.2em;
+    font-weight: normal;
+    margin-bottom: 0.2em;
+    color: #111;
+}
+
+#subtitle strong {
+    color: #888;
+}
+
+#subtitle p {
+    padding-right: 40px;
+    margin: 0;
+}
+
+#subtitle {
+    font-size: 1.0em;
+    color: #999;
+    line-height: 140%;
+    margin: 0;
+}
+
+/* Footer */
+
+#footer {
+    margin: 0 0 40px 80px;
+    color: #999;
+    padding: 20px 0;
+    position: relative;
+}
+
+#footer p {
+    margin: 0;
+}
+
+/* Latest news */
+
+#content #recent-twits ul {
+    list-style: none;
+    margin-bottom: 25px;
+}
+
+#content #recent-twits ul li {
+    margin-bottom: 17px;
+}
+
+#content #recent-twits a {
+    color: #999;
+    text-decoration: none;
+    padding: 4px 0;
+}
+
+#recent-twits a .pub-date {
+    color: #999;
+    float: left;
+    text-align: center;
+    background: #EEE;
+    padding: 1px 0;
+    width: 40px;
+}
+
+#recent-twits a .title {
+    font-weight: bold;
+    border-bottom: 1px solid #DDD;
+    margin-left: 5px;
+}
+
+#content #recent-twits a:hover {
+    color: #333;
+}
+
+#content #recent-twits .more {
+    text-align: right;
+    margin-bottom: 0;
+}
+
+#content #recent-twits .more a {
+    background: #EEE;
+    color: #666;
+    float: right;
+    padding: 2px 6px;
+}
+
+#recent-twits a:hover .pub-date,
+#content #recent-twits .more a:hover {
+    color: #FFF;
+    background: #FF4F4F;
+}
+
+#timeline {
+    padding-bottom: 25px;
+}
+
+/* Clearfix */
+
+.clearfix:after {
+    content:".";
+    display:block;
+    height:0;
+    clear:both;
+    visibility:hidden;
+}
+
+.clearfix { display: inline-block; }
+
+/* Hide from IE Mac \*/
+.clearfix { display: block; }
+/* End hide from IE Mac */
+
