@@ -1,4 +1,4 @@
-application: pypg
+application: pyperugia
 version: 1
 runtime: python
 api_version: 1

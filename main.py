@@ -18,16 +18,40 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
 
 from utils import BaseHandler, NotFoundHandler
+from datetime import datetime
 
-class MainHandler(webapp.RequestHandler):
+import tweepy
+import gdata.calendar.service
+
+CAL_URI='/calendar/feeds/pypg.org_q4t5tc0ihaqgpth5nb3dhf8qg0%40group.calendar.google.com/public/full'
+CAL_TIME_FORMAT='%Y-%m-%dT%H:%M:%S.000+02:00'
+
+class IndexPage(BaseHandler):    
     def get(self):
-        self.response.out.write('Hello worlds!')
-
-
-class IndexPage(BaseHandler):
-    def get(self):
+        tweets = []
+        next_events = []
+        
+        # collect tweets from pyperugia
+        try:
+            tweets = tweepy.api.user_timeline('pyperugia', count=5)
+        except tweepy.TweepError, err:
+            # TODO: log error
+            pass
+        
+        # get next events on public calendar
+        cal_service = gdata.calendar.service.CalendarService()
+        cal_feed = cal_service.GetCalendarEventFeed(CAL_URI)
+        for entry in cal_feed.entry:
+            date = datetime.strptime(entry.when[0].start_time, CAL_TIME_FORMAT)
+            if date < datetime.now():
+                continue
+            title = entry.title.text
+            next_events.append( {'date':date, 'title':title} )
+        
+        # render template        
         self.render_template("index.html", {
-            
+            'tweets' : tweets,
+            'next_events' : next_events, 
         })
 
 

@@ -213,6 +213,7 @@ h1#title {
     color: #999;
     text-decoration: none;
     padding: 4px 0;
+    cursor: default;
 }
 
 #recent-twits a .pub-date {
@@ -220,13 +221,10 @@ h1#title {
     float: left;
     text-align: center;
     background: #EEE;
-    padding: 1px 0;
-    width: 40px;
 }
 
 #recent-twits a .title {
     font-weight: bold;
-    border-bottom: 1px solid #DDD;
     margin-left: 5px;
 }
 
@@ -244,6 +242,7 @@ h1#title {
     color: #666;
     float: right;
     padding: 2px 6px;
+    cursor: auto;
 }
 
 #recent-twits a:hover .pub-date,

@@ -4,7 +4,7 @@
         <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <TITLE>PyPg - Python User Group Perugia</TITLE>
         <LINK rel="stylesheet" href="/css/default.css" type="text/css" media="screen" title="default stylesheet" charset="utf-8">
-        <LINK rel="shortcut icon" href="/images/icons/favicon.ico">
+        <!--<LINK rel="shortcut icon" href="/images/icons/favicon.ico">-->
     </HEAD>
     <BODY class="bodyclass-default">
         
@@ -29,40 +29,43 @@
                 <H2 id="tagline">Come partecipare</H2>
                 <UL>
                     <LI>
-                        <STRONG>Mailing list</STRONG>: E' il mezzo di comunicazione principale, <a href="http://groups.google.com/group/pypg">iscriviti</a>!
+                        <STRONG>Mailing list</STRONG>: E' il mezzo di comunicazione principale, <a target="_blank" href="http://groups.google.com/group/pypg">iscriviti</a>!
                     </LI>
                     <LI>
-                        <STRONG>Microblogging</STRONG>: Seguici su <a href="http://twitter.com/pyperugia">Twitter</a> o <a href="http://identi.ca/pypg">Identi.ca</a>, passano tanti tweet interessanti...
+                        <STRONG>Microblogging</STRONG>: Seguici su <a target="_blank" href="http://twitter.com/pyperugia">Twitter</a> o <a target="_blank" href="http://identi.ca/pypg">Identi.ca</a>, passano tanti tweet interessanti...
                     </LI>
                     <LI>
-                        <STRONG>Github</STRONG>: Se vuoi darci una mano, <a href="http://github.com/pypg/pypg">forka il progetto</a> del nostro sito.
+                        <STRONG>Github</STRONG>: Se vuoi darci una mano, <a target="_blank" href="http://github.com/pypg/pypg">forka il progetto</a> del nostro sito.
                     </LI>
                 </UL>
             </DIV>
             <DIV id="timeline" class="two-col section third-section clearfix">
                 <DIV class="col1">
-                <H2 id="tagline">Prossimo evento</H2>
+                <H2 id="tagline">Prossimi eventi</H2>
                 <UL>
+                    {% if not next_events %}
                     <LI>
-                        <STRONG>01/01/1970, ore 0:00</STRONG>: Meeting
+                        <STRONG>Nessun evento in programma</STRONG>
                     </LI>
+                    {% endif %}
+                    {% for event in next_events %}
+                    <LI>
+                        <STRONG>{{ event.date|date:"d/m/Y" }}, ore {{ event.date|time:"H:i" }}</STRONG>: {{ event.title }}
+                    </LI>
+                    {% endfor %}
                 </UL>
                 </DIV>
                 <DIV id="recent-twits" class="col2">
                     <H2>Ultime da Twitter</H2>
                     <UL>
+                        {% for tweet in tweets %}
                         <LI class="clearfix">
-                            <A href=""><SPAN class="pub-date">08.31</SPAN><SPAN class="title">Taking a break from client ...</SPAN></A>
+                            <A href="javascript:void(0)"><SPAN class="pub-date">{{ tweet.created_at|date:"d/m/Y" }}</SPAN><SPAN class="title">{{ tweet.text }}</SPAN></A>
                         </LI>
-                        <LI class="clearfix">
-                            <A href=""><SPAN class="pub-date">04.06</SPAN><SPAN class="title">Accepting new work</SPAN></A>
-                        </LI>
-                        <LI class="clearfix">
-                            <A href=""><SPAN class="pub-date">01.26</SPAN><SPAN class="title">So, it has come to ...</SPAN></A>
-                        </LI>
+                        {% endfor %}
                     </UL>
                     <P class="more">
-                        <A href="http://twitter.com/pyperugia">Tutti i tweet</A>
+                        <A target="_blank" href="http://twitter.com/pyperugia">Tutti i tweet</A>
                     </P>
                 </DIV>
             </DIV>
