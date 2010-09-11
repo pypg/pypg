@@ -16,18 +16,19 @@
 #
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
+from google.appengine.api import urlfetch
 
 from utils import BaseHandler, NotFoundHandler
 from datetime import datetime
 import logging
 
-import feedparser
+from twitter_oauth_handler import *
 import gdata.calendar.service
 
 CAL_URI='/calendar/feeds/pypg.org_q4t5tc0ihaqgpth5nb3dhf8qg0%40group.calendar.google.com/public/full'
 CAL_TIME_FORMAT='%Y-%m-%dT%H:%M:%S.000+02:00'
 TWITTER_URI='http://twitter.com/statuses/user_timeline/183262263.rss'
-TWITTER_TIME_FORMAT='%a, %d %b %Y %H:%M:%S +0000'
+TWITTER_TIME_FORMAT='%a %b %d %H:%M:%S +0000 %Y'
 
 class IndexPage(BaseHandler):
     def get(self):
@@ -35,10 +36,12 @@ class IndexPage(BaseHandler):
         next_events = []
         
         # collect tweets from pyperugia
-        feeds = feedparser.parse(TWITTER_URI)
-        tweets = feeds.entries
-        for t in tweets:
-            t.updated = datetime.strptime(t.updated, TWITTER_TIME_FORMAT)
+        # NOTICE: oauth will not work on dev server
+        client = OAuthClient('twitter', self)
+        items = client.get('/statuses/user_timeline')
+        for t in items:
+            date = datetime.strptime(t['created_at'], TWITTER_TIME_FORMAT)
+            tweets.append( { 'date': date, 'text':t['text']} )
         
         # get next events on public calendar
         cal_service = gdata.calendar.service.CalendarService()
@@ -66,6 +69,7 @@ class LegalPage(BaseHandler):
 def main():
     application = webapp.WSGIApplication([
       ('/', IndexPage),
+      ('/oauth/(.*)/(.*)', OAuthHandler),
       ('/legal', LegalPage),
       ('.*', NotFoundHandler),
       ], debug=True)

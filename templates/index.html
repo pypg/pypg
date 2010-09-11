@@ -58,7 +58,7 @@
     <UL>
         {% for tweet in tweets %}
         <LI class="clearfix">
-            <A href="javascript:void(0)"><SPAN class="pub-date">{{ tweet.updated|date:"d/m/Y" }}</SPAN><SPAN class="title">{{ tweet.title }}</SPAN></A>
+            <A href="javascript:void(0)"><SPAN class="pub-date">{{ tweet.date|date:"d/m/Y" }}</SPAN><SPAN class="title">{{ tweet.text }}</SPAN></A>
         </LI>
         {% endfor %}
     </UL>
