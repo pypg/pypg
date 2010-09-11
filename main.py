@@ -19,24 +19,26 @@ from google.appengine.ext.webapp import util
 
 from utils import BaseHandler, NotFoundHandler
 from datetime import datetime
+import logging
 
-import tweepy
+import feedparser
 import gdata.calendar.service
 
 CAL_URI='/calendar/feeds/pypg.org_q4t5tc0ihaqgpth5nb3dhf8qg0%40group.calendar.google.com/public/full'
 CAL_TIME_FORMAT='%Y-%m-%dT%H:%M:%S.000+02:00'
+TWITTER_URI='http://twitter.com/statuses/user_timeline/183262263.rss'
+TWITTER_TIME_FORMAT='%a, %d %b %Y %H:%M:%S +0000'
 
-class IndexPage(BaseHandler):    
+class IndexPage(BaseHandler):
     def get(self):
         tweets = []
         next_events = []
         
         # collect tweets from pyperugia
-        try:
-            tweets = tweepy.api.user_timeline('pyperugia', count=5)
-        except tweepy.TweepError, err:
-            # TODO: log error
-            pass
+        feeds = feedparser.parse(TWITTER_URI)
+        tweets = feeds.entries
+        for t in tweets:
+            t.updated = datetime.strptime(t.updated, TWITTER_TIME_FORMAT)
         
         # get next events on public calendar
         cal_service = gdata.calendar.service.CalendarService()
@@ -54,10 +56,17 @@ class IndexPage(BaseHandler):
             'next_events' : next_events, 
         })
 
+class LegalPage(BaseHandler):
+    def get(self):
+        # render template        
+        self.render_template("legal.html", {
+          #
+        })
 
 def main():
     application = webapp.WSGIApplication([
       ('/', IndexPage),
+      ('/legal', LegalPage),
       ('.*', NotFoundHandler),
       ], debug=True)
     util.run_wsgi_app(application)

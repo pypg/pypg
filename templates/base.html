@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<HTML xmlns="http://www.w3.org/1999/xhtml">
+    <HEAD>
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <TITLE>{% block title %}{% endblock %}</TITLE>
+        <LINK rel="stylesheet" href="/css/default.css" type="text/css" media="screen" title="default stylesheet" charset="utf-8">
+        <!--<LINK rel="shortcut icon" href="/images/icons/favicon.ico">-->
+    </HEAD>
+    <BODY class="bodyclass-default">
+        
+        {% block header %}
+        <DIV id="header">
+            {% block header_contents %}    
+            {% endblock %}
+        </DIV>
+        {% endblock %}
+        
+        <DIV id="content" class="clearfix">
+            {% block contents %}
+            
+            {% block heading %}
+            <DIV id="title-section" class="section first-section">
+                {% block heading_contents %}
+                {% endblock %}
+            </DIV>
+            {% endblock %}
+            
+            {% block main %}
+            <DIV id="about" class="section second-section clearfix">
+                {% block main_contents %}
+                {% endblock %}
+            </DIV>
+            {% endblock %}
+            
+            {% block sidebar %}
+            <DIV id="timeline" class="two-col section third-section clearfix">
+                {% block sidebar_contents %}
+                {% endblock %}
+            </DIV>
+            {% endblock %}
+            
+            {% endblock %}        
+        </DIV>
+        
+        <DIV id="footer" class="clearfix">
+            {% block footer %}
+            <P>
+                Sito sviluppato in Python su Google App Engine. Codice: http://github.com/pypg
+            </P>
+            <P>
+                © 2010 PyPg - <A href="legal">Note Legali</A>
+            </P>
+            {% endblock %}
+        </DIV>
+        
+    </BODY>
+</HTML>
