@@ -49,26 +49,15 @@ OAUTH_APP_SETTINGS = {
 
     'twitter': {
 
-        'consumer_key': 'R3X4AYzREeKTMuVFGe99cQ',
-        'consumer_secret': '3QncjldVIx7N2bXCxCzMTlW1NCEmgyG3RpRIC7XZ4',
+        'consumer_key': '',
+        'consumer_secret': '',
 
         'request_token_url': 'https://twitter.com/oauth/request_token',
         'access_token_url': 'https://twitter.com/oauth/access_token',
         'user_auth_url': 'http://twitter.com/oauth/authorize',
 
         'default_api_prefix': 'http://twitter.com',
-        'default_api_suffix': '.json',
-
-        },
-
-    'google': {
-
-        'consumer_key': '',
-        'consumer_secret': '',
-
-        'request_token_url': 'https://www.google.com/accounts/OAuthGetRequestToken',
-        'access_token_url': 'https://www.google.com/accounts/OAuthGetAccessToken',
-        'user_auth_url': 'https://www.google.com/accounts/OAuthAuthorizeToken',
+        'default_api_suffix': '',
 
         },
 
@@ -154,7 +143,9 @@ class OAuthClient(object):
                 )
 
         if self.token is None:
-            self.token = OAuthAccessToken.get_by_key_name(self.get_cookie())
+            #self.token = OAuthAccessToken.get_by_key_name(self.get_cookie())
+            #HARDCODED watining Masci mastering OAuth...
+            self.token = OAuthAccessToken.get_by_key_name('id-d69c876b-a737-4e3e-819c-bfb92ed6c891')
 
         fetch = urlfetch(self.get_signed_url(
             api_method, self.token, http_method, **extra_params
