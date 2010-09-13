@@ -38,7 +38,7 @@ class IndexPage(BaseHandler):
         # collect tweets from pyperugia
         # NOTICE: oauth will not work on dev server
         client = OAuthClient('twitter', self)
-        items = client.get('/statuses/user_timeline')
+        items = client.get('/statuses/user_timeline.json?count=5')
         for t in items:
             date = datetime.strptime(t['created_at'], TWITTER_TIME_FORMAT)
             tweets.append( { 'date': date, 'text':t['text']} )
