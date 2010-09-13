@@ -37,11 +37,15 @@ class IndexPage(BaseHandler):
         
         # collect tweets from pyperugia
         # NOTICE: oauth will not work on dev server
-        client = OAuthClient('twitter', self)
-        items = client.get('/statuses/user_timeline.json?count=5')
-        for t in items:
-            date = datetime.strptime(t['created_at'], TWITTER_TIME_FORMAT)
-            tweets.append( { 'date': date, 'text':t['text']} )
+        try:
+            client = OAuthClient('twitter', self)
+            items = client.get('/statuses/user_timeline.json?count=5')
+            for t in items:
+                date = datetime.strptime(t['created_at'], TWITTER_TIME_FORMAT)
+                tweets.append( { 'date': date, 'text':t['text']} )
+        except Exception, e:
+            logging.error('failed retrieving data from Twitter: %s' % e)
+            pass
         
         # get next events on public calendar
         cal_service = gdata.calendar.service.CalendarService()
