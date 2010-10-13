@@ -10,5 +10,9 @@ handlers:
 - url: /images
   static_dir: templates/images
 
+- url: /favicon.ico
+  static_files: templates/images/favicon.ico
+  upload: templates/images/favicon.ico
+
 - url: .*
   script: main.py
